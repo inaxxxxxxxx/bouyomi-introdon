@@ -22,7 +22,7 @@ export default function ScoreBoard({
     <div className="grid grid-cols-3 gap-2 w-full">
       <div className="bg-white border border-gray-200 rounded-xl p-3 text-center shadow-sm">
         <div className="text-xs text-gray-400 mb-1">スコア</div>
-        <div className="text-xl font-black text-[#e8003d] tabular-nums">
+        <div className="text-xl font-black text-[#d80c18] tabular-nums">
           {score.toLocaleString()}
           <span className="text-xs font-normal text-gray-400">pt</span>
         </div>
@@ -31,14 +31,14 @@ export default function ScoreBoard({
       <div className="bg-white border border-gray-200 rounded-xl p-3 text-center shadow-sm">
         <div className="text-xs text-gray-400 mb-1">問題数</div>
         <div className="text-xl font-black text-[#1a1a1a] tabular-nums">
-          第<span className="text-[#e8003d]">{questionNumber}</span>問
+          第<span className="text-[#d80c18]">{questionNumber}</span>問
         </div>
       </div>
 
       <div className="bg-white border border-gray-200 rounded-xl p-3 text-center shadow-sm">
         <div className="text-xs text-gray-400 mb-1">正解率</div>
         <div className="text-xl font-black text-[#1a1a1a] tabular-nums">
-          <span className={accuracy >= 70 ? "text-green-500" : accuracy >= 40 ? "text-yellow-500" : "text-[#e8003d]"}>
+          <span className={accuracy >= 70 ? "text-green-500" : accuracy >= 40 ? "text-yellow-500" : "text-[#d80c18]"}>
             {accuracy}
           </span>
           <span className="text-xs font-normal text-gray-400">%</span>
@@ -46,8 +46,8 @@ export default function ScoreBoard({
       </div>
 
       {streak >= 2 && (
-        <div className="col-span-3 bg-[#e8003d]/5 border border-[#e8003d]/20 rounded-xl px-4 py-2 text-center">
-          <span className="text-[#e8003d] font-bold">
+        <div className="col-span-3 bg-[#d80c18]/5 border border-[#d80c18]/20 rounded-xl px-4 py-2 text-center">
+          <span className="text-[#d80c18] font-bold">
             {streak}連勝中🔥
           </span>
         </div>

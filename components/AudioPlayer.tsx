@@ -89,7 +89,7 @@ export default function AudioPlayer({ lyrics, onLyricAdvance }: AudioPlayerProps
               ? "bg-gray-700 text-white"
               : isFinished
               ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-              : "bg-[#e8003d] text-white hover:bg-[#c0002f]"
+              : "bg-[#d80c18] text-white hover:bg-[#c0002f]"
           }
         `}
       >
@@ -127,7 +127,7 @@ export default function AudioPlayer({ lyrics, onLyricAdvance }: AudioPlayerProps
             key={i}
             className={`
               w-2 h-2 rounded-full transition-all duration-300
-              ${i < currentIndex ? "bg-[#e8003d]" : i === currentIndex ? "bg-[#e8003d] animate-pulse" : "bg-gray-300"}
+              ${i < currentIndex ? "bg-[#d80c18]" : i === currentIndex ? "bg-[#d80c18] animate-pulse" : "bg-gray-300"}
             `}
           />
         ))}

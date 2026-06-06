@@ -34,8 +34,9 @@ export default function HintPanel({
         onClick={onUseHint}
         disabled={isRevealed}
         className={`
-          w-full px-4 py-3 rounded-full font-semibold text-sm
+          w-full py-3 rounded-full font-black text-base
           transition-all duration-200 active:scale-95 border
+          shadow-[0_2px_8px_rgba(0,0,0,0.04)]
           ${
             isRevealed
               ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
@@ -79,7 +80,7 @@ export default function HintPanel({
       {hintsUsed > 0 && hintsUsed < 5 && (
         <p className="text-xs text-center text-gray-400">
           ヒント{hintsUsed}回使用 → 獲得スコア:{" "}
-          <span className="text-[#e8003d] font-bold">
+          <span className="text-[#d80c18] font-bold">
             {hintsUsed === 1 ? 70 : hintsUsed === 2 ? 50 : hintsUsed === 3 ? 30 : 10}pt
           </span>
         </p>
