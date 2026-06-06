@@ -110,7 +110,7 @@ export default function GameScreen() {
   const song = game.currentSong
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#fff0f3] to-[#f5f5f5] text-[#1a1a1a] flex flex-col">
+    <div className="min-h-screen bg-white text-[#1a1a1a] flex flex-col">
       <Confetti active={showConfetti} />
       <FloatingNotes />
 
