@@ -115,7 +115,7 @@ export default function GameScreen() {
       <FloatingNotes />
 
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-[#e8003d] px-4 py-3 shadow-md">
+      <header className="sticky top-0 z-50 bg-[#e8003d] px-4 py-3 shadow-md">
         <div className="max-w-md mx-auto flex items-center gap-2">
           <span className="text-2xl animate-wave inline-block">🎤</span>
           <h1 className="text-lg font-black text-white tracking-tight drop-shadow">
@@ -185,18 +185,14 @@ export default function GameScreen() {
         {(game.status === "playing" || game.status === "answered") && song && (
           <>
             {/* Song meta card */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm relative overflow-hidden">
-              {/* decorative top stripe */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#e8003d] via-pink-400 to-[#e8003d]" />
-
-              <div className="flex items-center gap-3 flex-wrap pt-1">
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm">
+              <div className="flex items-center gap-3 flex-wrap">
                 <span className="px-3 py-1 rounded-full bg-[#e8003d]/10 text-[#e8003d] text-xs font-bold border border-[#e8003d]/20">
                   🎵 {song.genre}
                 </span>
                 <span className="text-[#e8003d] text-sm tracking-widest">
                   {renderDifficulty(song.difficulty)}
                 </span>
-                <span className="ml-auto text-xs text-gray-400 font-bold">Q.{game.questionNumber}</span>
               </div>
 
               {/* Title blocks */}
@@ -368,16 +364,6 @@ function ResultPanel({
         <div className="font-black text-[#1a1a1a] text-lg">{song.title}</div>
         <div className="text-gray-500 text-sm">{song.artist} / {song.year}年</div>
       </div>
-
-      {/* Points */}
-      {isCorrect && (
-        <div className="text-center bg-[#e8003d]/5 rounded-xl py-3 border border-[#e8003d]/10">
-          <span className="text-4xl font-black text-[#e8003d]">+{points}pt</span>
-          {hintsUsed > 0 && (
-            <div className="text-xs text-gray-400 mt-1">ヒント{hintsUsed}回使用で減点</div>
-          )}
-        </div>
-      )}
 
       {/* Next button */}
       <button
