@@ -2,12 +2,29 @@ import type { Metadata, Viewport } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "🎤 歌詞棒読みクイズ",
-  description: "有名な楽曲の歌詞を棒読み音声で再生し、曲名を当てるクイズゲーム",
+  title: "棒読みイントロドン",
+  description: "有名な歌詞を感情ゼロで読み上げます。何の曲か当ててみよう！",
+  openGraph: {
+    title: "棒読みイントロドン",
+    description: "有名な歌詞を感情ゼロで読み上げます。何の曲か当ててみよう！",
+    images: [
+      {
+        url: "/ogp.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "棒読みイントロドン",
+    description: "有名な歌詞を感情ゼロで読み上げます。何の曲か当ててみよう！",
+    images: ["/ogp.png"],
+  },
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#d80c18",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -16,7 +33,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className="bg-[#0f172a] text-white antialiased">{children}</body>
+      <body className="bg-white text-[#1a1a1a] antialiased">{children}</body>
     </html>
   )
 }
