@@ -14,7 +14,8 @@ const initialGameState: GameState = {
   questionNumber: 0,
   score: 0,
   hintsUsed: 0,
-  lyricsRevealed: 2,
+  lyricsRevealed: 1,
+  lyricsPlayed: 0,
   userAnswer: "",
   isCorrect: null,
   streak: 0,
@@ -60,7 +61,8 @@ export default function GameScreen() {
       currentSong: song,
       questionNumber: prev.questionNumber + 1,
       hintsUsed: 0,
-      lyricsRevealed: 2,
+      lyricsRevealed: 1,
+      lyricsPlayed: 0,
       userAnswer: "",
       isCorrect: null,
     }))
@@ -72,6 +74,7 @@ export default function GameScreen() {
       ...prev,
       status: "answered",
       isCorrect: false,
+      isPassed: true,
       streak: 0,
       totalAnswered: prev.totalAnswered + 1,
     }))
@@ -208,14 +211,17 @@ export default function GameScreen() {
                 <span className="text-base">🎼</span>
                 <span className="text-xs font-bold text-gray-400">歌詞</span>
               </div>
-              {song.lyrics.slice(0, game.lyricsRevealed).map((line, i) => (
+              {song.lyrics.slice(0, game.lyricsRevealed).map((_, i) => (
                 <div
                   key={i}
-                  className="py-3 px-4 rounded-xl bg-gray-50 border border-gray-100 text-sm text-[#1a1a1a] flex items-start gap-2"
+                  className="py-3 px-4 rounded-xl bg-gray-50 border border-gray-100 text-sm flex items-start gap-2"
                   style={{ animation: `fadeIn 0.3s ease-out ${i * 0.08}s both` }}
                 >
                   <span className="text-[#d80c18]/40 text-xs mt-0.5 shrink-0">♪</span>
-                  {line}
+                  {i < game.lyricsPlayed
+                    ? <span className="text-[#1a1a1a]">{song.lyrics[i]}</span>
+                    : <span className="text-gray-300 tracking-widest">？？？？？？？？？？？？</span>
+                  }
                 </div>
               ))}
               {game.lyricsRevealed < song.lyrics.length && game.status === "playing" && (
@@ -233,7 +239,8 @@ export default function GameScreen() {
                 onLyricAdvance={(idx) => {
                   setGame((prev) => ({
                     ...prev,
-                    lyricsRevealed: Math.max(prev.lyricsRevealed, Math.min(idx + 1, song.lyrics.length)),
+                    lyricsPlayed: idx,
+                    lyricsRevealed: Math.min(idx + 1, song.lyrics.length),
                   }))
                 }}
               />
@@ -292,20 +299,12 @@ export default function GameScreen() {
               </div>
             )}
 
-            {/* Hint panel */}
-            {game.status === "playing" && (
-              <HintPanel
-                song={song}
-                hintsUsed={game.hintsUsed}
-                onUseHint={handleHint}
-                lyricsRevealedCount={game.lyricsRevealed}
-              />
-            )}
 
             {/* Result */}
             {game.status === "answered" && (
               <ResultPanel
                 isCorrect={game.isCorrect}
+                isPassed={(game as any).isPassed ?? false}
                 song={song}
                 hintsUsed={game.hintsUsed}
                 onNext={handleNewQuestion}
@@ -314,17 +313,23 @@ export default function GameScreen() {
           </>
         )}
       </main>
+
+      <footer className="text-center py-3 text-xs text-gray-400">
+        ©みねた
+      </footer>
     </div>
   )
 }
 
 function ResultPanel({
   isCorrect,
+  isPassed,
   song,
   hintsUsed,
   onNext,
 }: {
   isCorrect: boolean | null
+  isPassed: boolean
   song: Song
   hintsUsed: number
   onNext: () => void
@@ -334,26 +339,28 @@ function ResultPanel({
   return (
     <div
       className={`
-        rounded-2xl border-2 p-5 space-y-4 shadow-md
+        rounded-2xl border p-5 space-y-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]
         ${isCorrect
-          ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-300"
-          : "bg-gradient-to-br from-red-50 to-pink-50 border-red-200"}
+          ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-200"
+          : "bg-white border-gray-100"}
         animate-fade-in-scale
       `}
     >
       {/* Result */}
       <div className="text-center space-y-2">
-        <div className="text-6xl">{isCorrect ? "🎉" : "😢"}</div>
-        {isCorrect && (
-          <div className="flex justify-center gap-1 text-2xl">
-            {"✨🌟✨".split("").map((s, i) => (
-              <span key={i} className="animate-float" style={{ animationDelay: `${i * 0.2}s` }}>{s}</span>
-            ))}
-          </div>
+        {isCorrect ? (
+          <>
+            <div className="text-6xl">🎉</div>
+            <div className="flex justify-center gap-1 text-2xl">
+              {"✨🌟✨".split("").map((s, i) => (
+                <span key={i} className="animate-float" style={{ animationDelay: `${i * 0.2}s` }}>{s}</span>
+              ))}
+            </div>
+            <div className="text-2xl font-black text-green-600">正解！！</div>
+          </>
+        ) : isPassed ? null : (
+          <div className="text-6xl">😢</div>
         )}
-        <div className={`text-2xl font-black ${isCorrect ? "text-green-600" : "text-[#d80c18]"}`}>
-          {isCorrect ? "正解！！" : "不正解…"}
-        </div>
       </div>
 
       {/* Correct answer */}

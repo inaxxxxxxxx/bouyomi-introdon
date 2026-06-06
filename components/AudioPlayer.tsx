@@ -39,10 +39,12 @@ export default function AudioPlayer({ lyrics, onLyricAdvance }: AudioPlayerProps
       if (index >= lyrics.length) return
 
       window.speechSynthesis.cancel()
-      const utterance = new SpeechSynthesisUtterance(lyrics[index])
-      utterance.lang = "ja-JP"
-      utterance.rate = 0.85
-      utterance.pitch = 1.0
+      const text = lyrics[index]
+      const isEnglish = /^[a-zA-Z0-9\s.,!?'"()-]+$/.test(text)
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = isEnglish ? "en-US" : "ja-JP"
+      utterance.rate = isEnglish ? 0.9 : 0.75
+      utterance.pitch = isEnglish ? 1.0 : 0.5
       utterance.volume = 1.0
 
       utterance.onstart = () => setIsPlaying(true)

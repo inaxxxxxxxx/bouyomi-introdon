@@ -24,4 +24,5 @@ export interface GameState {
   streak: number
   totalAnswered: number
   correctAnswered: number
+  lyricsPlayed: number
 }
