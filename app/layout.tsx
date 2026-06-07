@@ -21,6 +21,15 @@ export const metadata: Metadata = {
     description: "有名な歌詞を感情ゼロで読み上げます。何の曲か当ててみよう！",
     images: ["/ogp.png"],
   },
+  icons: {
+    apple: "/logo_sq.png",
+    icon: "/logo_sq.png",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "棒読みイントロドン",
+  },
 }
 
 export const viewport: Viewport = {
