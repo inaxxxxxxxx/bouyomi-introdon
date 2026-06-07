@@ -352,11 +352,10 @@ function ResultPanel({
           <>
             <div className="text-6xl">🎉</div>
             <div className="flex justify-center gap-1 text-2xl">
-              {"✨🌟✨".split("").map((s, i) => (
+              {["✨", "🌟", "✨"].map((s, i) => (
                 <span key={i} className="animate-float" style={{ animationDelay: `${i * 0.2}s` }}>{s}</span>
               ))}
             </div>
-            <div className="text-2xl font-black text-green-600">正解！！</div>
           </>
         ) : isPassed ? null : (
           <div className="text-6xl">😢</div>
