@@ -120,7 +120,9 @@ export default function GameScreen() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#d80c18] px-4 py-0 shadow-md">
         <div className="max-w-md mx-auto flex items-center justify-center">
-          <img src="/logo.png" alt="棒読みイントロドン" className="h-20 w-auto" />
+          <button onClick={() => setGame({ ...initialGameState })} className="active:opacity-70 transition-opacity">
+            <img src="/logo.png" alt="棒読みイントロドン" className="h-20 w-auto brightness-0 invert" />
+          </button>
         </div>
       </header>
 
