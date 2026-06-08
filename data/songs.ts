@@ -206,7 +206,6 @@ export const songs: Song[] = [
     difficulty: 1,
     year: 2007,
     lyrics: [
-      "A・RA・SHI",
       "はじけりゃ Yeah 素直に Good",
       "だからちょいと重いのは Boo",
       "That's all right",
