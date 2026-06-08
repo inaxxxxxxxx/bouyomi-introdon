@@ -84,7 +84,7 @@ export default function AudioPlayer({ lyrics, onLyricAdvance }: AudioPlayerProps
         onClick={handlePlay}
         disabled={!isSpeechSupported || isFinished}
         className={`
-          relative w-full max-w-xs px-6 py-4 rounded-full font-bold text-lg
+          relative w-full px-6 py-4 rounded-full font-bold text-lg
           transition-all duration-200 active:scale-95
           ${
             isPlaying
