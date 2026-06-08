@@ -79,6 +79,18 @@ body {
   50% { transform: rotate(10deg); }
 }
 
+@keyframes logoBounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.08); opacity: 1; }
+  70% { transform: scale(0.96); }
+  85% { transform: scale(1.03); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-logo-bounce-in {
+  animation: logoBounceIn 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
 .animate-float { animation: float 3s ease-in-out infinite; }
 .animate-float-slow { animation: floatSlow 4s ease-in-out infinite; }
 .animate-float-delay { animation: float 3.5s ease-in-out infinite 1s; }

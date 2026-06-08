@@ -113,12 +113,12 @@ export default function GameScreen() {
   const song = game.currentSong
 
   return (
-    <div className="min-h-screen bg-white text-[#1a1a1a] flex flex-col">
+    <div className={`min-h-screen ${game.status === "idle" ? "bg-[#d80c18]" : "bg-white"} text-[#1a1a1a] flex flex-col`}>
       <Confetti active={showConfetti} />
       <FloatingNotes />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#d80c18] px-4 py-0 shadow-md">
+      <header className={`sticky top-0 z-50 bg-[#d80c18] px-4 py-0 ${game.status === "idle" ? "hidden" : "shadow-md"}`}>
         <div className="max-w-md mx-auto flex items-center justify-center">
           <button onClick={() => setGame({ ...initialGameState })} className="active:opacity-70 transition-opacity">
             <img src="/logo.png" alt="棒読みイントロドン" className="h-20 w-auto brightness-0 invert" />
@@ -130,55 +130,54 @@ export default function GameScreen() {
 
         {/* ====== IDLE STATE ====== */}
         {game.status === "idle" && (
-          <div className="flex flex-col items-center justify-center min-h-[70vh] gap-6">
+          <div className="flex flex-col items-center justify-center min-h-[80vh] gap-8">
 
-            {/* hero illustration */}
-            <div className="relative flex items-center justify-center w-48 h-48">
-              {/* outer pulse ring */}
-              <div className="absolute w-40 h-40 rounded-full bg-[#d80c18]/10 animate-ping" style={{ animationDuration: "2s" }} />
-              {/* circle bg */}
-              <div className="absolute w-36 h-36 rounded-full bg-gradient-to-br from-[#d80c18] to-[#ff6b8a] shadow-xl" />
-              {/* center icon */}
-              <span className="relative text-7xl animate-float-slow">🎤</span>
-              {/* orbiting notes */}
-              <span className="absolute text-2xl animate-spin-slow" style={{ top: 8, right: 10 }}>🎵</span>
-              <span className="absolute text-xl animate-float" style={{ bottom: 10, left: 8, animationDelay: "1s" }}>🎶</span>
-            </div>
-
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl font-black text-[#1a1a1a]">
-                棒読みで聴こう
-                <span className="ml-2 text-[#d80c18]">♪</span>
-              </h2>
-              <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
-                有名な歌詞を感情ゼロで読み上げます。<br />何の曲か当ててみよう！
-              </p>
-            </div>
-
-            {/* decorative badges */}
-            <div className="flex gap-2 flex-wrap justify-center">
-              {["J-POP", "アニメ", "昭和歌謡", "アイドル"].map((g) => (
-                <span key={g} className="px-3 py-1 rounded-full bg-white border border-[#d80c18]/30 text-[#d80c18] text-xs font-bold shadow-sm">
-                  {g}
+            {/* 浮遊する音符（白） */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+              {[
+                { icon: "♪", top: "12%", left: "10%", delay: "0s", size: "text-3xl" },
+                { icon: "♫", top: "25%", left: "85%", delay: "1s", size: "text-4xl" },
+                { icon: "♩", top: "65%", left: "6%", delay: "0.5s", size: "text-2xl" },
+                { icon: "♬", top: "72%", left: "88%", delay: "1.5s", size: "text-3xl" },
+                { icon: "♪", top: "40%", left: "92%", delay: "2s", size: "text-xl" },
+                { icon: "♫", top: "88%", left: "15%", delay: "0.8s", size: "text-2xl" },
+              ].map((n, i) => (
+                <span key={i} className={`absolute ${n.size} text-white/20 animate-float select-none`}
+                  style={{ top: n.top, left: n.left, animationDelay: n.delay }}>
+                  {n.icon}
                 </span>
               ))}
             </div>
 
-            <button
-              onClick={handleNewQuestion}
-              className="
-                relative px-10 py-4 rounded-full font-black text-xl
-                bg-[#d80c18] text-white
-                shadow-[0_4px_24px_rgba(232,0,61,0.4)]
-                hover:bg-[#c0002f] hover:shadow-[0_4px_32px_rgba(232,0,61,0.6)]
-                active:scale-95 transition-all duration-200
-              "
-            >
-              🎲 出題する
-              <span className="absolute -top-2 -right-2 text-lg animate-float" style={{ animationDelay: "0.3s" }}>✨</span>
-            </button>
+            {/* ロゴ */}
+            <div className="relative z-10 flex flex-col items-center gap-8">
+              <div className="relative">
+                {/* ロゴ背後のぼんやり光 */}
+                <div className="absolute inset-0 blur-3xl bg-white/10 rounded-full scale-110" />
 
-            <p className="text-xs text-gray-400">{28}曲収録中！</p>
+                <img
+                  src="/logo_sq.png"
+                  alt="棒読みイントロドン"
+                  className="relative w-full object-contain animate-logo-bounce-in"
+                />
+              </div>
+
+              {/* スタートボタン */}
+              <button
+                onClick={handleNewQuestion}
+                className="
+                  w-64 py-4 rounded-full font-black text-xl
+                  bg-white text-[#d80c18]
+                  shadow-[0_4px_32px_rgba(0,0,0,0.2)]
+                  hover:shadow-[0_4px_40px_rgba(0,0,0,0.3)]
+                  active:scale-95 transition-all duration-200
+                "
+              >
+                スタート
+              </button>
+
+              <p className="text-white text-xs">{25}曲収録中</p>
+            </div>
           </div>
         )}
 
