@@ -163,18 +163,22 @@ export default function GameScreen() {
               </div>
 
               {/* スタートボタン */}
-              <button
-                onClick={handleNewQuestion}
-                className="
-                  w-64 py-4 rounded-full font-black text-xl
-                  bg-white text-[#d80c18]
-                  shadow-[0_4px_32px_rgba(0,0,0,0.2)]
-                  hover:shadow-[0_4px_40px_rgba(0,0,0,0.3)]
-                  active:scale-95 transition-all duration-200
-                "
-              >
-                スタート
-              </button>
+              <div className="relative">
+                <span className="absolute -left-6 top-1/2 -translate-y-1/2 text-white/50 text-xl animate-float" style={{ animationDelay: "0s" }}>♪</span>
+                <span className="absolute -right-6 top-1/2 -translate-y-1/2 text-white/50 text-xl animate-float" style={{ animationDelay: "0.5s" }}>♫</span>
+                <button
+                  onClick={handleNewQuestion}
+                  className="
+                    w-64 py-4 rounded-full font-black text-xl
+                    bg-white text-[#d80c18]
+                    shadow-[0_4px_32px_rgba(0,0,0,0.2)]
+                    hover:shadow-[0_4px_40px_rgba(0,0,0,0.3)]
+                    active:scale-95 transition-all duration-200
+                  "
+                >
+                  スタート
+                </button>
+              </div>
 
               <p className="text-white text-xs">{25}曲収録中</p>
             </div>
